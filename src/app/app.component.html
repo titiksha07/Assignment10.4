@@ -1,0 +1,62 @@
+
+        <div class="row">
+                <div class="form-wrap">
+                    <form novalidate autocomplete="off" [formGroup]="myForm" (ngSubmit)="addEmployee(myForm.value)">
+                        <h1>Add an Employee</h1>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="FirstName" formControlName="firstName">
+
+                            <div *ngIf="myForm.controls['firstName'].hasError('required')">
+                                
+                                    First name is required.
+    
+                                </div>
+                                <div *ngIf="myForm.controls['firstName'].hasError('pattern')">
+                                
+                                   Enter only alphabets
+    
+                                
+                             </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="LastName" formControlName="lastName">
+                            
+                            <div *ngIf="myForm.controls['lastName'].hasError('required')">
+                                
+                                    Last name is required.
+    
+                                </div>
+                         <div *ngIf="myForm.controls['lastName'].hasError('check')">
+                                
+                                   En ter only numbers with max length 3
+    
+                                
+                             </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="text" formControlName="employeeId"  class="form-control" placeholder="EmployeeId">
+                             <div *ngIf="myForm.controls['employeeId'].hasError('required')">
+                                 Employee Id is required
+                             </div>
+                      </div>
+                        <div class="form-group">
+                            <select class="txt-box" name="deptType" formControlName="employeeModel.deptType" class="form-control">
+                            <option [value]="employeeModel.dept" [disabled]="true">Select Option </option>
+                            <option *ngFor="let dept of deptType" [ngValue]="dept.type">
+                                {{dept.type}}
+                            </option>
+                         </select>
+                        </div>
+                    
+                        <input type="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Add" [disabled]="myForm.invalid">
+
+                    </form>
+                    <hr>
+                </div>
+            </div>
+            <!-- /.col-xs-12 -->
+       
+<hr/>
+<div *ngIf="employeesArray.length > 0">
+    <app-employee [employeeDetail]="employeesArray"></app-employee>
+</div>
